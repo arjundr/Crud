@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Ajax Example</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+
+<button type="button" id="request-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Open modal
+</button>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body" id=response>
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#request-btn").click(function(){
+        $.ajax({
+        	url: "/ajax-list",
+        	type: "GET",
+        	dataType:"json",
+        	success: function(result){
+
+				$("#response").html("<h2>The resonponse is</h2>  <strong>"+JSON.stringify(result)+"</strong>");
+				$("#response").append("<br><br><h2>Usage</h2>")
+				$.each(result, function() {
+                    html = "<div class='modal' id='myModal'>"
+                    +"<div class='modal-dialog'>"
+                    +"<div class='modal-content'>"
+                    +"<div class='modal-header'>"
+        			+"<h4 class='modal-title'>Modal Heading</h4>"
+        			+"<button type='button' class='close' data-dismiss='modal'>&times;</button></div>"
+                    +"<div class='modal-body'>Modal body..</div>"
+        			+"<div class='modal-footer'>"
+        	        +"<button type='button' class='btn btn-danger' data-dismiss='modal'>Close</button>"
+        	        +"</div></div></div></div>"
+                    $("#response").append(html)
+                });
+       		}
+    });
+    });
+});	
+</script>
+
+</body>
+</html>	

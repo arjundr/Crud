@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Ajax Example</title>
+</head>
+<body>
+
+
+<button id="request-btn">Click to show message from server</button>
+<div id=response></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#request-btn").click(function(){
+        $.ajax({
+        	url: "/ajax-message",
+        	type: "GET",
+        	dataType:"html",
+        	success: function(result){
+
+				$("#response").html(result);
+				
+       		}
+    });
+    });
+});	
+</script>
+
+</body>
+</html>

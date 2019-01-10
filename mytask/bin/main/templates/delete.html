@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Delete Example</title>
+</head>
+<body>
+	<div th:if="${message}" th:text=${message}></div>
+	<form th:action="@{/delete/}+${id}" method="post">
+
+		<div>
+			<label> Email : <input type="text" name="email"
+				th:value="${userdetails.email}" />
+			</label>
+		</div>
+		
+		<div>
+			<input type="submit" value="Delete" />
+		</div>
+	</form>
+</body>
+</html>	
